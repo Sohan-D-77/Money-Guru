@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transactions - Personal Finance</title>
+    <link rel="stylesheet" href="style.css"><!-- Header with User Icon on Every Page -->
+    <body class="transaction-page">
+      
+        <a href="user.html">
+            <img src="user.jpg" alt="User Icon" class="user-icon">
+        </a><div class="header">
+   
+    
+</head>
+<body>
+    <header>
+            <a href="index.html">
+                <img src="logoo.png" alt="Logo" class="curved-logo">
+            </a>
+        
+        <h2>Manage Transactions</h2>
+    </header>
+    <main class="aesthetic-container">
+        <form id="transaction-form">
+            <label for="transaction-id">Transaction ID:</label>
+            <input type="text" id="transaction-id" required>
+
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" required>
+
+            <label for="date">Date:</label>
+            <input type="date" id="date" required>
+
+            <label for="description">Description:</label>
+            <textarea id="description" placeholder="Optional"></textarea>
+
+            <button type="submit">Save Transaction</button>
+        </form>
+        <div id="transaction-output"></div>
+        <a href="index.html" class="back-button">Back to Home</a>
+
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
