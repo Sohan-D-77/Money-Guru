@@ -1,26 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/user.css">
     <title>User Profile</title>
-    <header>
-        <a href="index.html">
-            <img src="logoo.png" alt="Logo" class="curved-logo">
-        </a>
-    </header>
 </head>
 <body>
+    <nav>
+        <div class="logo">
+            <a href="index.html"><img src="assets/logoo.png" alt="Logo"></a>
+        </div>
+        <ul>
+            <li><a href="expense.html">Expense</a></li>
+            <li><a href="budget.html">Budget</a></li>
+            <li><a href="accounts.html">Accounts</a></li>
+            <li><a href="investment.html">Investment</a></li>
+        </ul>
+        <div class="user">
+            <a href="user.html"><img src="assets/user.jpg" alt="User"></a>
+        </div>
+    </nav>
+    
     <div class="user-profile">
-        <!-- User Details Section -->
-        <h2>Welcome, [User's Name]</h2>
-        <p>Your Account Details:</p>
-        <!-- Display user details here -->
-        
+        <div id="user-detail" class="glass-card">
+            <h2>User Details</h2>
+            <form>
+                <label for="first-name">First Name:</label>
+                <input type="text" id="first-name" required>
+    
+                <label for="last-name">Last Name:</label>
+                <input type="text" id="last-name" required>
+    
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" required>
+    
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+                <label for="date">Date of Birth:</label>
+                <input type="date" id="date" required>
+    
+                <label for="username">Username:</label>
+                <input type="text" id="username" required>
+    
+                <label for="password">Password:</label>
+                <input type="password" id="password" required>
+    
+                <button type="submit" class="edit-btn">Edit</button>
+            </form>
         <!-- Logout Button -->
         <div class="button-container">
             <button onclick="window.location.href='index.html'">Back to Home</button>
         </div>
         <button class="logout-btn" onclick="location.href='login.html';">Logout</button>
     </div>
+    <div class="footer">
+        <footer class="form-footer">
+            <p>&copy; 2024 Personal Finance Management. All rights reserved.</p>
+            <a href="privacy.html">Privacy Policy</a> | 
+            <a href="terms.html">Terms of Service</a>
+        </footer>
+    </div >
+    <canvas id="particle-canvas"></canvas>
+    <script src="js/script.js"></script>
 </body>
 </html>
