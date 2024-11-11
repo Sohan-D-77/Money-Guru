@@ -4,45 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accounts - Personal Finance</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css">
     <!-- Header with User Icon on Every Page -->
     <body class="accounts-page">
         <a href="index.html">
-            <img src="assets/logoo.png" alt="Logo" class="curved-logo">
+            <img src="logoo.png" alt="Logo" class="curved-logo">
         </a>
         <a href="user.html">
-            <img src="assets/user.jpg" alt="User Icon" class="user-icon"> 
+            <img src="user.jpg" alt="User Icon" class="user-icon">
         </a>
     <header>
-        
- 
-    
-
 </head>
 <body>
     <header>
         <h2>Manage Accounts</h2>
     </header>
     <main class="aesthetic-container">
-        <form id="account-form">
-            <label for="account-id">Account ID:</label>
-            <input type="text" id="account-id" required>
-
-            <label for="income">Income:</label>
-            <input type="number" id="income" required>
-
-            <label for="type">Account Type:</label>
-            <input type="text" id="type" required>
-
-            <label for="balance">Balance:</label>
-            <input type="number" id="balance" required>
-
-            <label for="bank">Bank:</label>
-            <input type="text" id="bank" required>
-
-            <button type="submit">Save Account</button>
+        <form id="account-form" method="POST" action="account.php">
+            <input type="text" name="account_name" placeholder="Account Name" required>
+            <input type="text" name="income" placeholder="Income">
+            <input type="text" name="balance" placeholder="Balance">
+            <input type="text" name="bank" placeholder="Bank">
+            <button type="submit">Submit</button>
         </form>
         <div id="account-output"></div>
+        
 <!-- Accounts Page -->
 <div class="button-container">
     <button onclick="window.location.href='transactions.html'">Add Transactions</button>
@@ -54,6 +40,6 @@
 </div>
 
     </main>
-    <script src="js/script.js"></script>
+    <script src="account.js"></script>
 </body>
 </html>
