@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Budget Management</title>
-    <link rel="stylesheet" href="css/style.css"><!-- Header with User Icon on Every Page -->
+    <link rel="stylesheet" href="style.css"><!-- Header with User Icon on Every Page -->
     <body class="budget-page">
         <a href="index.html">
-            <img src="assets/logoo.png" alt="Logo" class="curved-logo">
+            <img src="logoo.png" alt="Logo" class="curved-logo">
         </a>
         <a href="user.html">
-            <img src="assets/user.jpg" alt="User Icon" class="user-icon">
+            <img src="user.jpg" alt="User Icon" class="user-icon">
         </a> <header>
        
     
@@ -23,15 +23,16 @@
     <main>
         <div class="section glass-card">
             <h2>Create Budget</h2>
-            <form id="budget-form">
+            <form id="budget-form" method="POST" action="budget.php">
                 <label for="budget-category">Category:</label>
-                <input type="text" id="budget-category" required>
-
+                <input type="text" id="budget-category" name="category" required>
+            
                 <label for="budget-amount">Amount:</label>
-                <input type="number" id="budget-amount" required>
-
+                <input type="number" id="budget-amount" name="amount" required>
+            
                 <button type="submit">Set Budget</button>
             </form>
+            
         </div>
         <div class="section glass-card">
             <h2>Your Budgets</h2>
@@ -53,6 +54,6 @@
         <a href="index.html" class="back-button">Back to Home</a>
 
     </main>
-    <script src="js/script.js"></script>
+    <script src="budget.js"></script>
 </body>
 </html>
