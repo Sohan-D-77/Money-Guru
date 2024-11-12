@@ -4,59 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Personal Finance Management</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css\index.css">
 </head>
-<body class="index"> <!-- Add class for background -->
-    <a href="index.html">
-        <img src="logoo.png" alt="Logo" class="curved-logo">
-    </a>
-    <a href="user.html">
-        <img src="user.jpg" alt="User Icon" class="user-icon">
-    </a>
-    <header>
-       
-        <h1>Welcome to Your Personal Finance Dashboard</h1>
-      
-    </header>
-    <main>
-        <section class="main-navigation">
-            <div class="nav-item">
-                <a href="budget.html">
-                    <img src="budget.jpg" alt="Budget">
-                    <span class="nav-text">Budget</span>
-                </a>
-            </div>
-            <div class="nav-item">
-                <a href="expense.html">
-                    <img src="expense.jpg" alt="Expense">
-                    <span class="nav-text">Expense</span>
-                </a>
-            </div>
-            <div class="nav-item">
-                <a href="accounts.html">
-                    <img src="accounts.jpg" alt="Accounts">
-                    <span class="nav-text">Accounts</span>
-                </a>
-            </div>
-            <div class="nav-item">
-                <a href="investment.html">
-                    <img src="investment.jpg" alt="Investment">
-                    <span class="nav-text">Investment</span>
-                </a>
-            </div>
-            <div class="nav-item">
-                <a href="summary1.php">
-                    <img src="summary.jpg" alt="Investment">
-                    <span class="nav-text">Summary</span>
-                </a>
-            </div>
-        </section>
-    </main>
-    <footer class="form-footer">
-        <p>&copy; 2024 Personal Finance Management. All rights reserved.</p>
-        <a href="privacy.html">Privacy Policy</a> | 
-        <a href="terms.html">Terms of Service</a>
-    </footer>
-    <script src="script.js"></script>
+<body class="index"> 
+     <nav>
+        <div class="logo">
+            <a href="#home"><img src="assets\logoo.png" alt="Logo"></a>
+        </div>
+        <ul>
+            <li><a href="expense.html">Expense</a></li>
+            <li><a href="budget.html">Budget</a></li>
+            <li><a href="accounts.html">Accounts</a></li>
+            <li><a href="investment.html">Investment</a></li>
+        </ul>
+        <div class="user">
+            <a href="user.php"><img src="assets\user.jpg" alt="User"></a>
+        </div>
+    </nav>
+
+    <div class="footer">
+        <footer class="form-footer">
+            <p>&copy; 2024 Personal Finance Management. All rights reserved.</p>
+            <a href="privacy.html">Privacy Policy</a> | 
+            <a href="terms.html">Terms of Service</a>
+        </footer>
+    </div >
+    <canvas id="particle-canvas"></canvas>
+    <script src="js\script.js"></script>
 </body>
 </html>
