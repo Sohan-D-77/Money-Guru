@@ -4,46 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expense - Personal Finance</title>
-    <link rel="stylesheet" href="css/style.css"><!-- Header with User Icon on Every Page -->
-    <body class="investment-page">
-     
-        <a href="user.html">
-            <img src="assets/user.jpg" alt="User Icon" class="user-icon">
-        </a>
-    <div class="header">
-   
+    <link rel="stylesheet" href="css/investment.css"><!-- Header with User Icon on Every Page -->
     
 </head>
 <body>
+    <nav>
+        <div class="logo">
+            <a href="index.html"><img src="assets/logoo.png" alt="Logo"></a>
+        </div>
+        <ul>
+            <li><a href="expense.html">Expense</a></li>
+            <li><a href="budget.html">Budget</a></li>
+            <li><a href="accounts.html">Accounts</a></li>
+            <li><a href="investment.html">Investment</a></li>
+        </ul>
+        <div class="user">
+            <a href="user.html"><img src="assets/user.jpg" alt="User"></a>
+        </div>
+    </nav>
     <header>
-            <a href="index.html">
-                <img src="assets/logoo.png" alt="Logo" class="curved-logo">
-            </a>
-        
-        <h2>Manage Expenses</h2>
+        <h2>Manage Investments</h2>
     </header>
-    <main class="aesthetic-container">
-        <form id="expense-form">
-            <label for="type">Expense Type:</label>
-            <input type="text" id="type" required>
-
-            <label for="expense-id">Expense ID:</label>
-            <input type="text" id="expense-id" required>
+    <<main class="aesthetic-container">
+        <!-- Investment Form -->
+        <form id="investment-form" method="POST" action="investment.php">
+            <label for="type">Investment Type:</label>
+            <input type="text" name="type" placeholder="e.g., Stock, Real Estate" required>
 
             <label for="date">Date:</label>
-            <input type="date" id="date" required>
+            <input type="date" name="date" required>
 
             <label for="amount">Amount:</label>
-            <input type="number" id="amount" required>
+            <input type="number" name="amount" step="0.01" required>
+
+            <label for="returns">Expected Returns:</label>
+            <input type="number" name="returns" step="0.01" placeholder="Optional">
 
             <label for="description">Description:</label>
-            <textarea id="description" placeholder="Optional"></textarea>
+            <textarea name="description" placeholder="Optional"></textarea>
 
-            <button type="submit">Save Expense</button>
+            <button type="submit">Save Investment</button><br><br>
         </form>
-        <div id="expense-output"></div>
+
+        <div id="investment-output"></div>
         <a href="index.html" class="back-button">Back to Home</a>
     </main>
-    <script src="js/script.js"></script>
+    <div class="footer">
+        <footer class="form-footer">
+            <p>&copy; 2024 Personal Finance Management. All rights reserved.</p>
+            <a href="privacy.html">Privacy Policy</a> | 
+            <a href="terms.html">Terms of Service</a>
+        </footer>
+    </div >
+    <canvas id="particle-canvas"></canvas>
+    <script src="js/investment.js"></script>
 </body>
 </html>

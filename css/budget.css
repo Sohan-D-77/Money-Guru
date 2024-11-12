@@ -8,10 +8,7 @@
 body {
     margin: 0;
     background: #000000;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    /* Add padding-bottom to prevent footer overlap */
-    padding-bottom: 60px; /* Adjust based on your footer height */
+   overflow: hidden ;
 }
 
 body::-webkit-scrollbar {
@@ -142,7 +139,7 @@ input:focus, select:focus {
     box-shadow: 0 0 8px rgba(212, 175, 55, 0.8);
 }
 
-.edit-form {
+.budget-form {
     display: flex;
     flex-direction: column;
     background-color: rgba(71, 71, 64, 0.7);
@@ -178,6 +175,7 @@ button, .back-button {
     background: linear-gradient(135deg, #b8860b, #d4af37);
     color: #fff;
     border: none;
+    text-align: center;
     border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
@@ -189,28 +187,6 @@ button, .back-button {
 }
 
 button:hover, .back-button:hover {
-    background: linear-gradient(135deg, #d4af37, #b8860b);
-    transform: translateY(-2px);
-}
-
-.logout-btn {
-    background: linear-gradient(135deg, #b8860b, #d4af37);
-    color: #fff;
-    border: none;
-    padding: 0.7rem 1.5rem;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    /* Updated margin and positioning */
-    margin: 1rem auto;
-    display: block;
-    position: relative;
-    z-index: 1;
-}
-
-.logout-btn:hover {
     background: linear-gradient(135deg, #d4af37, #b8860b);
     transform: translateY(-2px);
 }

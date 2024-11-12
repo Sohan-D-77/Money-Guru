@@ -37,7 +37,7 @@ class Particle {
         this.canvas = document.getElementById('particle-canvas');
         this.ctx = this.canvas.getContext('2d');
         this.particles = [];
-        this.particleCount = 100;
+        this.particleCount = 150;
         
         this.init();
         window.addEventListener('resize', () => this.resize());

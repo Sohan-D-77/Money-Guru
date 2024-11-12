@@ -4,55 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Budget Management</title>
-    <link rel="stylesheet" href="css/style.css"><!-- Header with User Icon on Every Page -->
-    <body class="budget-page">
-        <a href="index.html">
-            <img src="assets/logoo.png" alt="Logo" class="curved-logo">
-        </a>
-        <a href="user.html">
-            <img src="assets/user.jpg" alt="User Icon" class="user-icon">
-        </a> <header>
-       
+    <link rel="stylesheet" href="css/budget.css"><!-- Header with User Icon on Every Page -->   
     
 </head>
 <body>
+    <nav>
+        <div class="logo">
+            <a href="index.html"><img src="assets/logoo.png" alt="Logo"></a>
+        </div>
+        <ul>
+            <li><a href="expense.html">Expense</a></li>
+            <li><a href="budget.html">Budget</a></li>
+            <li><a href="accounts.html">Accounts</a></li>
+            <li><a href="investment.html">Investment</a></li>
+        </ul>
+        <div class="user">
+            <a href="user.html"><img src="assets/user.jpg" alt="User"></a>
+        </div>
+    </nav>
     <header>
         <h1>Budget Management</h1>
-        <button onclick="logout()" class="logout-btn">Logout</button>
     </header>
     <main>
-        <div class="section glass-card">
+        <div class="glass-card">
             <h2>Create Budget</h2>
-            <form id="budget-form">
+            <form id="budget-form" class="budget-form">
                 <label for="budget-category">Category:</label>
                 <input type="text" id="budget-category" required>
 
                 <label for="budget-amount">Amount:</label>
-                <input type="number" id="budget-amount" required>
+                <input type="number" id="budget-amount" required><br ><br>
 
                 <button type="submit">Set Budget</button>
             </form>
         </div>
-        <div class="section glass-card">
-            <h2>Your Budgets</h2>
-            <table id="budget-list">
-                <thead>
-                    <tr>
-                        <th>Category</th>
-                        <th>Budget Amount</th>
-                        <th>Spent</th>
-                        <th>Remaining</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Budgets will be added here dynamically -->
-                </tbody>
-            </table>
-        </div>
-        <a href="index.html" class="back-button">Back to Home</a>
-
+        <a href="index.html" class="back-button">Back to Home</a><br><br>
     </main>
-    <script src="js/script.js"></script>
+    <div class="footer">
+        <footer class="form-footer">
+            <p>&copy; 2024 Personal Finance Management. All rights reserved.</p>
+            <a href="privacy.html">Privacy Policy</a> | 
+            <a href="terms.html">Terms of Service</a>
+        </footer>
+    </div >
+    <canvas id="particle-canvas"></canvas>
+    <script src="js/budget.js"></script>
 </body>
 </html>

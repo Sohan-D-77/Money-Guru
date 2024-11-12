@@ -88,80 +88,83 @@ class Particle {
         requestAnimationFrame(() => this.animate());
     }
   }
-// URLs to the PHP scripts
-const accountsURL = 'get_accounts.php';
-const transactionsURL = 'get_transactions.php';
-const investmentsURL = 'get_investments.php';
-const expensesURL = 'get_expenses.php';
-const budgetsURL = 'get_budgets.php';
+  
+  // Initialize the particle system when the page loads
+  window.addEventListener('load', () => {
+    new ParticleSystem();
+  });
+document.getElementById("expense-form").addEventListener("submit", function (e) {
+    e.preventDefault(); // Prevent default form submission
 
-// Fetch data and calculate totals
-let totalIncome = 0;
-let totalSpendings = 0;
-let totalTransactions = 0;
-let totalBudget = 0;
-let totalInvestments = 0;
+    const type = document.getElementById("type").value;
+    const date = document.getElementById("date").value;
+    const amount = document.getElementById("amount").value;
+    const description = document.getElementById("description").value;
 
-async function fetchData(url) {
-    const response = await fetch(url);
-    return await response.json();
+    // Create FormData object
+    const formData = new FormData();
+    formData.append("type", type);
+    formData.append("date", date);
+    formData.append("amount", amount);
+    formData.append("description", description);
+
+    // Send data via AJAX
+    fetch("expense.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Server response:", data); // Debugging output
+
+        if (data.success) {
+            alert(data.message); // Display success message
+            addExpenseToOutput(type, date, amount, description); // Update the display
+        } else {
+            alert("Error: " + data.message); // Display error message
+        }
+    })
+    .catch(error => {
+        console.error("Fetch error:", error); // Debugging output
+    });
+
+    // Clear form fields
+    document.getElementById("expense-form").reset();
+});
+
+// Function to add an expense entry to the output dynamically
+function addExpenseToOutput(type, date, amount, description) {
+    const expenseOutput = document.getElementById("expense-output");
+
+    const expenseItem = document.createElement("div");
+    expenseItem.classList.add("expense-item");
+    expenseItem.innerHTML = `
+        <p><strong>Type:</strong> ${type}</p>
+        <p><strong>Date:</strong> ${date}</p>
+        <p><strong>Amount:</strong> ${amount}</p>
+        <p><strong>Description:</strong> ${description || "N/A"}</p>
+        <hr>
+    `;
+
+    expenseOutput.appendChild(expenseItem);
 }
+// script.js
 
-async function calculateSummary() {
-    const accounts = await fetchData(accountsURL);
-    const transactions = await fetchData(transactionsURL);
-    const investments = await fetchData(investmentsURL);
-    const expenses = await fetchData(expensesURL);
-    const budgets = await fetchData(budgetsURL);
+document.getElementById('expense-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission
 
-    // Calculate total income and balance in all accounts
-    accounts.forEach(account => {
-        totalIncome += parseFloat(account.income);
-    });
-    
-    // Calculate total transaction amount
-    transactions.forEach(transaction => {
-        totalTransactions += parseFloat(transaction.amount);
-    });
-    
-    // Calculate total investments
-    investments.forEach(investment => {
-        totalInvestments += parseFloat(investment.amount);
-    });
-    
-    // Calculate total expenses and check against budget
-    let totalExpenses = 0;
-    expenses.forEach(expense => {
-        totalExpenses += parseFloat(expense.amount);
-    });
+    // Collect form data
+    const formData = new FormData(this);
 
-    budgets.forEach(budget => {
-        totalBudget += parseFloat(budget.amount);
-    });
-
-    // Display amounts in the Summary Page
-    document.getElementById('total-earnings').innerText = `$${totalIncome.toFixed(2)}`;
-    document.getElementById('total-spendings').innerText = `$${totalExpenses.toFixed(2)}`;
-    document.getElementById('total-transactions').innerText = `$${totalTransactions.toFixed(2)}`;
-    document.getElementById('total-investments').innerText = `$${totalInvestments.toFixed(2)}`;
-    document.getElementById('total-budgets').innerText = `$${totalBudget.toFixed(2)}`;
-
-    // Show warning if expenses exceed the budget
-    if (totalExpenses > totalBudget) {
-        document.getElementById('budget-warning').innerText = "Warning: You have exceeded your budget!";
-    }
-}
-
-// Tax calculation
-function calculateTax() {
-    const taxPercentage = parseFloat(document.getElementById('tax-percentage').value);
-    if (isNaN(taxPercentage) || taxPercentage < 0) {
-        alert("Please enter a valid tax percentage.");
-        return;
-    }
-    const taxAmount = (totalIncome * taxPercentage) / 100;
-    document.getElementById('tax-amount').innerText = `$${taxAmount.toFixed(2)}`;
-}
-
-// Run calculations on page load
-document.addEventListener('DOMContentLoaded', calculateSummary);
+    // Send data to expense.php
+    fetch('expense.php', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.text())
+    .then(data => {
+        // Display server response in #expense-output
+        document.getElementById('expense-output').innerHTML = data;
+    })
+    .catch(error => console.error('Error:', error));
+});

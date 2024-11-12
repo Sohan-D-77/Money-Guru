@@ -1,3 +1,4 @@
+// investment.js
 class Particle {
     constructor(canvas) {
         this.canvas = canvas;
@@ -88,80 +89,52 @@ class Particle {
         requestAnimationFrame(() => this.animate());
     }
   }
-// URLs to the PHP scripts
-const accountsURL = 'get_accounts.php';
-const transactionsURL = 'get_transactions.php';
-const investmentsURL = 'get_investments.php';
-const expensesURL = 'get_expenses.php';
-const budgetsURL = 'get_budgets.php';
+   // Initialize the particle system when the page loads
+   window.addEventListener('load', () => {
+    new ParticleSystem();
+  });
 
-// Fetch data and calculate totals
-let totalIncome = 0;
-let totalSpendings = 0;
-let totalTransactions = 0;
-let totalBudget = 0;
-let totalInvestments = 0;
+document.getElementById("investment-form").addEventListener("submit", function(event) {
+    event.preventDefault();
 
-async function fetchData(url) {
-    const response = await fetch(url);
-    return await response.json();
-}
+    const formData = new FormData(this);
 
-async function calculateSummary() {
-    const accounts = await fetchData(accountsURL);
-    const transactions = await fetchData(transactionsURL);
-    const investments = await fetchData(investmentsURL);
-    const expenses = await fetchData(expensesURL);
-    const budgets = await fetchData(budgetsURL);
-
-    // Calculate total income and balance in all accounts
-    accounts.forEach(account => {
-        totalIncome += parseFloat(account.income);
+    fetch("investment.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById("investment-output").innerHTML = data;
+        this.reset();
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        document.getElementById("investment-output").innerHTML = "An error occurred while saving the investment.";
     });
-    
-    // Calculate total transaction amount
-    transactions.forEach(transaction => {
-        totalTransactions += parseFloat(transaction.amount);
+});
+
+
+
+// investment.js
+
+document.getElementById("investment-form").addEventListener("submit", function(event) {
+    event.preventDefault();  // Prevent form from submitting normally
+
+    const formData = new FormData(this);
+
+    // Send form data to PHP script via POST
+    fetch("investment.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById("investment-output").innerHTML = data; // Display response
+        this.reset(); // Reset form fields
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        document.getElementById("investment-output").innerHTML = "An error occurred while saving the investment.";
     });
-    
-    // Calculate total investments
-    investments.forEach(investment => {
-        totalInvestments += parseFloat(investment.amount);
-    });
-    
-    // Calculate total expenses and check against budget
-    let totalExpenses = 0;
-    expenses.forEach(expense => {
-        totalExpenses += parseFloat(expense.amount);
-    });
-
-    budgets.forEach(budget => {
-        totalBudget += parseFloat(budget.amount);
-    });
-
-    // Display amounts in the Summary Page
-    document.getElementById('total-earnings').innerText = `$${totalIncome.toFixed(2)}`;
-    document.getElementById('total-spendings').innerText = `$${totalExpenses.toFixed(2)}`;
-    document.getElementById('total-transactions').innerText = `$${totalTransactions.toFixed(2)}`;
-    document.getElementById('total-investments').innerText = `$${totalInvestments.toFixed(2)}`;
-    document.getElementById('total-budgets').innerText = `$${totalBudget.toFixed(2)}`;
-
-    // Show warning if expenses exceed the budget
-    if (totalExpenses > totalBudget) {
-        document.getElementById('budget-warning').innerText = "Warning: You have exceeded your budget!";
-    }
-}
-
-// Tax calculation
-function calculateTax() {
-    const taxPercentage = parseFloat(document.getElementById('tax-percentage').value);
-    if (isNaN(taxPercentage) || taxPercentage < 0) {
-        alert("Please enter a valid tax percentage.");
-        return;
-    }
-    const taxAmount = (totalIncome * taxPercentage) / 100;
-    document.getElementById('tax-amount').innerText = `$${taxAmount.toFixed(2)}`;
-}
-
-// Run calculations on page load
-document.addEventListener('DOMContentLoaded', calculateSummary);
+});

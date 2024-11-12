@@ -4,22 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accounts - Personal Finance</title>
-    <link rel="stylesheet" href="css/style.css">
-    <!-- Header with User Icon on Every Page -->
-    <body class="accounts-page">
-        <a href="index.html">
-            <img src="assets/logoo.png" alt="Logo" class="curved-logo">
-        </a>
-        <a href="user.html">
-            <img src="assets/user.jpg" alt="User Icon" class="user-icon"> 
-        </a>
-    <header>
-        
- 
-    
+    <link rel="stylesheet" href="css/account.css">
 
 </head>
 <body>
+    <nav>
+        <div class="logo">
+            <a href="index.html"><img src="assets/logoo.png" alt="Logo"></a>
+        </div>
+        <ul>
+            <li><a href="expense.html">Expense</a></li>
+            <li><a href="budget.html">Budget</a></li>
+            <li><a href="accounts.html">Accounts</a></li>
+            <li><a href="investment.html">Investment</a></li>
+        </ul>
+        <div class="user">
+            <a href="user.html"><img src="assets/user.jpg" alt="User"></a>
+        </div>
+    </nav>
     <header>
         <h2>Manage Accounts</h2>
     </header>
@@ -38,22 +40,27 @@
             <input type="number" id="balance" required>
 
             <label for="bank">Bank:</label>
-            <input type="text" id="bank" required>
+            <input type="text" id="bank" required><br><br>
 
-            <button type="submit">Save Account</button>
+            <button type="submit">Save Account</button><br><br>
         </form>
         <div id="account-output"></div>
-<!-- Accounts Page -->
-<div class="button-container">
-    <button onclick="window.location.href='transactions.html'">Add Transactions</button>
-</div>
+<!-- Accounts Page --
 
-<!-- Existing Back to Home button -->
+ting Back to Home button -->
 <div class="button-container">
     <button onclick="window.location.href='index.html'">Back to Home</button>
 </div>
 
     </main>
-    <script src="js/script.js"></script>
+    <div class="footer">
+        <footer class="form-footer">
+            <p>&copy; 2024 Personal Finance Management. All rights reserved.</p>
+            <a href="privacy.html">Privacy Policy</a> | 
+            <a href="terms.html">Terms of Service</a>
+        </footer>
+    </div >
+    <canvas id="particle-canvas"></canvas>
+    <script src="js/account.js"></script>
 </body>
 </html>

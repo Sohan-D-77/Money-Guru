@@ -88,80 +88,60 @@ class Particle {
         requestAnimationFrame(() => this.animate());
     }
   }
-// URLs to the PHP scripts
-const accountsURL = 'get_accounts.php';
-const transactionsURL = 'get_transactions.php';
-const investmentsURL = 'get_investments.php';
-const expensesURL = 'get_expenses.php';
-const budgetsURL = 'get_budgets.php';
+  
+  // Initialize the particle system when the page loads
+  window.addEventListener('load', () => {
+    new ParticleSystem();
+  });
+document.getElementById("budget-form").addEventListener("submit", function (e) {
+    e.preventDefault(); // Prevent form from submitting normally
 
-// Fetch data and calculate totals
-let totalIncome = 0;
-let totalSpendings = 0;
-let totalTransactions = 0;
-let totalBudget = 0;
-let totalInvestments = 0;
+    const category = document.getElementById("budget-category").value;
+    const amount = document.getElementById("budget-amount").value;
 
-async function fetchData(url) {
-    const response = await fetch(url);
-    return await response.json();
+    // Create a FormData object to send data
+    const formData = new FormData();
+    formData.append("category", category);
+    formData.append("amount", amount);
+
+    // Send data via AJAX
+    fetch("budget.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert(data.message); // Display success message
+            addBudgetToTable(category, amount); // Update the table
+        } else {
+            alert(data.message); // Display error message
+        }
+    })
+    .catch(error => console.error("Error:", error));
+
+    // Clear the form fields
+    document.getElementById("budget-form").reset();
+});
+
+// Function to add a budget entry to the table dynamically
+function addBudgetToTable(category, amount) {
+    const budgetList = document.getElementById("budget-list").querySelector("tbody");
+    const row = document.createElement("tr");
+
+    row.innerHTML = `
+        <td>${category}</td>
+        <td>${amount}</td>
+        <td>0.00</td>
+        <td>${amount}</td>
+        <td><button onclick="deleteBudget(this)">Delete</button></td>
+    `;
+
+    budgetList.appendChild(row);
 }
 
-async function calculateSummary() {
-    const accounts = await fetchData(accountsURL);
-    const transactions = await fetchData(transactionsURL);
-    const investments = await fetchData(investmentsURL);
-    const expenses = await fetchData(expensesURL);
-    const budgets = await fetchData(budgetsURL);
-
-    // Calculate total income and balance in all accounts
-    accounts.forEach(account => {
-        totalIncome += parseFloat(account.income);
-    });
-    
-    // Calculate total transaction amount
-    transactions.forEach(transaction => {
-        totalTransactions += parseFloat(transaction.amount);
-    });
-    
-    // Calculate total investments
-    investments.forEach(investment => {
-        totalInvestments += parseFloat(investment.amount);
-    });
-    
-    // Calculate total expenses and check against budget
-    let totalExpenses = 0;
-    expenses.forEach(expense => {
-        totalExpenses += parseFloat(expense.amount);
-    });
-
-    budgets.forEach(budget => {
-        totalBudget += parseFloat(budget.amount);
-    });
-
-    // Display amounts in the Summary Page
-    document.getElementById('total-earnings').innerText = `$${totalIncome.toFixed(2)}`;
-    document.getElementById('total-spendings').innerText = `$${totalExpenses.toFixed(2)}`;
-    document.getElementById('total-transactions').innerText = `$${totalTransactions.toFixed(2)}`;
-    document.getElementById('total-investments').innerText = `$${totalInvestments.toFixed(2)}`;
-    document.getElementById('total-budgets').innerText = `$${totalBudget.toFixed(2)}`;
-
-    // Show warning if expenses exceed the budget
-    if (totalExpenses > totalBudget) {
-        document.getElementById('budget-warning').innerText = "Warning: You have exceeded your budget!";
-    }
+// Function to handle budget deletion
+function deleteBudget(button) {
+    const row = button.parentNode.parentNode;
+    row.remove(); // Remove the row from the table
 }
-
-// Tax calculation
-function calculateTax() {
-    const taxPercentage = parseFloat(document.getElementById('tax-percentage').value);
-    if (isNaN(taxPercentage) || taxPercentage < 0) {
-        alert("Please enter a valid tax percentage.");
-        return;
-    }
-    const taxAmount = (totalIncome * taxPercentage) / 100;
-    document.getElementById('tax-amount').innerText = `$${taxAmount.toFixed(2)}`;
-}
-
-// Run calculations on page load
-document.addEventListener('DOMContentLoaded', calculateSummary);
