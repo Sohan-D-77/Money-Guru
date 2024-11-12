@@ -1,15 +1,14 @@
 <?php
-// Database connection configuration
-$host = "localhost";
-$dbname = "personal_finance_db";
-$username = "root";
-$password = "";
+$servername = "localhost";  // Server name, usually "localhost"
+$username = "root";         // MySQL username (default for XAMPP is "root")
+$password = "";             // MySQL password (default for XAMPP is an empty string)
+$dbname = "personal_finance_db";  // Database name (change to your actual database name)
 
-// Create connection
-$connection = new mysqli($host, $username, $password, $dbname);
+// Create the connection
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
-if ($connection->connect_error) {
-    die("Connection failed: " . $connection->connect_error);
+// Check the connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 ?>
