@@ -6,9 +6,21 @@
 }
 body {
     margin: 0;
-    overflow: hidden;
     background: #000000;
-}  
+    overflow-y: scroll;
+    overflow-x: hidden;
+    /* Add padding-bottom to prevent footer overlap */
+    padding-bottom: 60px; /* Adjust based on your footer height */
+}
+
+body::-webkit-scrollbar {
+    width: 0;
+}
+
+body {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer and Edge */
+}
 #particle-canvas {
     position: fixed;
     top: 0;
@@ -16,6 +28,102 @@ body {
     width: 100%;
     height: 100%;
     z-index: -1;
+}
+.glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    padding: 2rem;
+    margin-top: 2rem;
+    transition: all 0.4s ease;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    /* Add margin-bottom to ensure space for the logout button */
+    margin-bottom: 2rem;
+}
+.dice-container {
+    position: relative;
+    display: grid;
+    grid-template-areas: 
+        "top-left . top-right"
+        ". center ."
+        "bottom-left . bottom-right";
+    gap: 5rem;
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 2rem;
+}
+
+.image-button {
+    width: 150px;
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.image-button-overlay {
+    width: 150px; /* Match the width of other buttons */
+    height: 150px; /* Match the height of other buttons */
+    padding: 0.75rem;
+    background: linear-gradient(135deg, #b8860b, #d4af37);
+    color: #fff;
+    border: none;
+    border-radius: 15px; /* Match the border-radius of other buttons */
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 2; /* Ensure it appears above other buttons */
+}
+
+/* Update hover effect to maintain centering */
+
+/* Position-specific styles */
+.top-left {
+    grid-area: top-left;
+}
+
+.top-right {
+    grid-area: top-right;
+}
+
+.center {
+    grid-area: center;
+    justify-self: center;
+}
+
+.bottom-left {
+    grid-area: bottom-left;
+}
+
+.bottom-right {
+    grid-area: bottom-right;
+}
+
+.image-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #d4af37;
+    margin-bottom: 1.5rem;
 }
 nav {
     display: flex;
@@ -28,9 +136,25 @@ nav {
     margin-right: 50px;
 
 }
-.user{
-    top: 0; /* Adjust spacing from the top */
-    right: 20px;
+.logo-big {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.logo-big {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.logo-big img {
+    height: 120px; /* Increased from 70px */
+    border: 4px solid #f7b738;
+    border-radius: 30%;
+    cursor: pointer;
+    margin: 0 auto;
+    display: block;
 }
 
 .user img {
